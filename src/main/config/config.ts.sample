@@ -1,0 +1,12 @@
+import OAuthConfig from "../models/OAuthConfig";
+
+const oauthConfig: OAuthConfig = {
+  clientId: "1234567890",
+  clientSecret: "aBcDeFgHiJkLmNoPqRsTuVwXyZ",
+  grantType: "authorization_code",
+  redirectUri: "http://localhost:5005/auth",
+  scope: "identify guilds",
+  port: 5005,
+};
+
+export default oauthConfig;
