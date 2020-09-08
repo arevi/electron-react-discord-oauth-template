@@ -28,7 +28,7 @@ The following commands with allow for an intuitive development environment with 
 | `dev:react`    | Launches a live webpack development server on port 3000                  |
 | `dev:electron` | Launches electron and connects to port 3000                              |
 
-> The `react-dev` command must be ran prior to `electron-dev` to connect to the local server.
+> The `dev:react` command must be ran prior to `dev:electron` to connect to the local server.
 
 > While in `Development` mode Chrome Developer Tools can be opened via Ctrl+Shift+I.
 
