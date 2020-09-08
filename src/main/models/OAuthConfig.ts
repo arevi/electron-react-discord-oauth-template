@@ -1,10 +1,11 @@
+// Interface for Discord OAuth request
 interface OAuthConfig {
-  clientId: string;
-  clientSecret: string;
-  grantType: string;
-  redirectUri: string;
+  client_id: string;
+  client_secret: string;
+  grant_type: string;
+  redirect_uri: string;
+  code?: string;
   scope: string;
-  port: number;
 }
 
 export default OAuthConfig;

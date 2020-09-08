@@ -1,12 +1,18 @@
 import OAuthConfig from "../models/OAuthConfig";
 
+// Discord OAuth configuration
 const oauthConfig: OAuthConfig = {
-  clientId: "1234567890",
-  clientSecret: "aBcDeFgHiJkLmNoPqRsTuVwXyZ",
-  grantType: "authorization_code",
-  redirectUri: "http://localhost:5005/auth",
+  client_id: "replaceme",
+  client_secret: "replaceme",
+  grant_type: "authorization_code",
+  redirect_uri: "http://localhost:5005/auth",
   scope: "identify guilds",
-  port: 5005,
 };
 
-export default oauthConfig;
+// Port for express server to listen for Discord response on
+const listeningPort: number = 5005;
+
+// Discord Guild ID array
+const validGuilds: string[] = ["539258061081018378"];
+
+export { oauthConfig, listeningPort, validGuilds };

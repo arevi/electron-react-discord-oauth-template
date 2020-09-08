@@ -1,16 +1,16 @@
-import { app, BrowserWindow } from "electron";
-import OAuthConfig from "./config/config";
+import { app, BrowserWindow, ipcMain } from "electron";
+import { oauthConfig } from "./config/config";
 import AuthClient from "./services/auth";
 
 let mainWindow: BrowserWindow;
-const authClient: AuthClient = new AuthClient(OAuthConfig);
+const authClient: AuthClient = new AuthClient(oauthConfig);
 const isDev: boolean = process.env.ELECTRON_ENV == "dev";
 
 //Render main window w/ configuration settings
 const renderWindow = async () => {
   mainWindow = new BrowserWindow({
-    width: 1200,
-    height: 800,
+    width: 800,
+    height: 500,
     minWidth: 800,
     minHeight: 500,
     center: true,
@@ -33,19 +33,40 @@ const renderWindow = async () => {
       mainWindow.webContents.closeDevTools();
     }
   });
+
+  // Begin auth process
+  beginAuth();
 };
 
-//
+// Opens browser window with discord OAuth screen
+const beginAuth = () => {
+  authClient.openBrowser();
+};
+
+/**
+ * Emits an event to the ipcRenderer, with the authorization result
+ * @param status Discord authorization result
+ */
+export const setAuthResult = (status: boolean) => {
+  mainWindow.webContents.send(
+    "authChannel",
+    status === true ? "success" : "failure"
+  );
+
+  authClient.stopListening();
+};
+
+// Renders main window
 app.on("ready", renderWindow);
 
-//
+// Closes app once all windows closed
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
     app.quit();
   }
 });
 
-//
+// Renders main window (But for MacOS!)
 app.on("activate", () => {
   if (mainWindow === null) {
     renderWindow();
